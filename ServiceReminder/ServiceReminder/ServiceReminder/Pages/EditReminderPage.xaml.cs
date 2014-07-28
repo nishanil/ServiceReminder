@@ -8,7 +8,8 @@ using Xamarin.Forms;
 
 namespace ServiceReminder.Pages
 {
-	public partial class EditReminderPage
+
+	public partial class EditReminderPage 
 	{
 
         EditReminderPageViewModel vm;
@@ -16,22 +17,43 @@ namespace ServiceReminder.Pages
 		{
 			InitializeComponent ();
 
-             vm = new EditReminderPageViewModel();
+            vm = new EditReminderPageViewModel();
+            // Sometimes Commands in ViewModels will require to navigate.
             vm.Navigation = Navigation;
+
             this.BindingContext = vm;
+
             SetBinding(Page.TitleProperty, new Binding(EditReminderPageViewModel.TitlePropertyName));
             SetBinding(Page.IconProperty, new Binding(EditReminderPageViewModel.IconPropertyName));
 
-            //ToolbarItems.Clear();
-            //ToolbarItems.Add(new ToolbarItem("Save", null, async ()=> {
-                
-            //}));
 		}
 
+        private Action AddToolBar()
+        {
+            return async () => {
+                var result = await vm.Save();
+                if (!result)
+                    await DisplayAlert("Error", "Name and Reg No are required.", "OK", null);
+                else
+                    await Navigation.PopAsync();
+
+            };
+        }
+
+        ToolbarItem toolbarItem;
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            ToolbarItems.Add(toolbarItem = new ToolbarItem("Save", null, AddToolBar(), 0, 0));
+
             vm.OnAppearing();
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            ToolbarItems.Remove(toolbarItem);
         }
 
 

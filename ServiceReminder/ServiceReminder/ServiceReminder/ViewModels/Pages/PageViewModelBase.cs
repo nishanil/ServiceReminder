@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace ServiceReminder.ViewModels
 {
     public class PageViewModelBase : ObservableObject
     {
+        public INavigation Navigation { get; set; }
         public const string TitlePropertyName = "Title";
 
         private string title;

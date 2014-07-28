@@ -36,19 +36,19 @@
                             </DatePicker>
                         </StackLayout>
                     </ViewCell>
-                        <cells:PickerCell x:TypeArguments="vm:ServiceIntervalPickerCellViewModel" SelectedItem="{Binding SelectedServiceInterval, Mode=TwoWay}">
+                        <cells:PickerCell x:TypeArguments="vm:ServiceIntervalPickerCellViewModel">
                     </cells:PickerCell>
                         <TextCell Text="Next Service"  Detail="{Binding NextServiceDate}"></TextCell>
                 </TableSection>
                 <TableSection Title="Reminder Settings">
-                        <SwitchCell Text="Remind" On="{Binding IsReminder, Mode=TwoWay}"></SwitchCell>
-                    <cells:PickerCell x:TypeArguments="vm:RemindMePickerCellViewModel">
+                        <SwitchCell Text="Remind" On="{Binding IsReminder, Mode=TwoWay}" ></SwitchCell>
+                        <cells:PickerCell x:TypeArguments="vm:RemindMePickerCellViewModel">
                     </cells:PickerCell>
                 </TableSection>
 
             </TableView.Root>
         </TableView>
-            <Button Command="{Binding SaveCommand}" Text="Save"></Button>
+            <!--<Button Command="{Binding SaveCommand}" Text="Save"></Button>-->
     </StackLayout>
     </ContentPage.Content>
 </ContentPage>

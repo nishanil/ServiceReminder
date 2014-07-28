@@ -23,25 +23,30 @@ namespace ServiceReminder.ViewModels
                 if (App.SelectedModel == null)
                     return;
                 var selectedIndex = Convert.ToInt32(index);
-                var selectedItem = Items[selectedIndex];
-                if (selectedItem == OneDayBefore)
+                    var selectedItem = Items[selectedIndex];
+                    if (selectedItem == OneDayBefore)
                     App.SelectedModel.NextReminder = App.SelectedModel.NextServiceDate.AddDays(-1);
-                if (selectedItem == OneWeekBefore)
+                    if (selectedItem == OneWeekBefore)
                     App.SelectedModel.NextReminder = App.SelectedModel.NextServiceDate.AddDays(-7);
-                if (selectedItem == OneMonthBefore)
+                    if (selectedItem == OneMonthBefore)
                     App.SelectedModel.NextReminder = App.SelectedModel.NextServiceDate.AddMonths(-1);
-
-                SelectedItem = selectedItem;
             });
         }
 
-
-        private object selectedItem;
-
-        public object SelectedItem
+        public int? GetSelectedIndex()
         {
-            get { return selectedItem; }
-            set { selectedItem = value; OnPropertyChanged(); }
+            if (App.SelectedModel != null)
+            {
+                // This is called during edit ensure right item is selected in the picker
+                var date = App.SelectedModel.NextReminder.Subtract(App.SelectedModel.NextServiceDate);
+                if (date.TotalDays == -1)
+                    return  0;
+                else if (date.TotalDays == -7)
+                    return  1;
+                else if (date.TotalDays == -31)
+                    return  3;
+            }
+            return 0;
         }
 
         private string pickerText = "Remind Me Before";

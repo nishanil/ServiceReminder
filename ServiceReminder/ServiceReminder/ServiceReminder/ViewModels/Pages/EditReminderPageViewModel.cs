@@ -12,8 +12,6 @@ namespace ServiceReminder.ViewModels
     public class EditReminderPageViewModel : PageViewModelBase
     {
 
-        public INavigation Navigation { get; set; }
-
         VehicleListPicker vehicleListPicker;
         public EditReminderPageViewModel()
         {
@@ -35,11 +33,8 @@ namespace ServiceReminder.ViewModels
             else
             {
                 this.Title = "Edit Service Reminder";
-                
-
             }
 
-         
             ChooseVehichleTypeCommand = new Command(async () => {
 
                 vehicleListPicker = new VehicleListPicker();
@@ -47,9 +42,10 @@ namespace ServiceReminder.ViewModels
                     await Navigation.PushAsync(vehicleListPicker);
             });
 
-            SaveCommand = new Command(async () =>
-            {
-                Save();
+            // Demo usage of MessagingCenter
+            MessagingCenter.Subscribe<ServiceIntervalPickerCellViewModel>(this, "serviceIntervalChanged", (sender) => {
+
+                OnPropertyChanged("NextServiceDate");
             });
         }
 
@@ -60,8 +56,6 @@ namespace ServiceReminder.ViewModels
             if (App.SelectedModel != null && !string.IsNullOrEmpty(App.SelectedModel.Name) && !string.IsNullOrEmpty(App.SelectedModel.RegistrationNumber))
             {
                 new ReminderItemDatabase().SaveItem(App.SelectedModel);
-
-                await Navigation.PopAsync();
             }
             else
                 return false;
@@ -74,11 +68,7 @@ namespace ServiceReminder.ViewModels
         {
             if (vehicleListPicker != null)
                 VehicleType = vehicleListPicker.SelectedVehicle;
-
-            
         }
-
-
 
         public string Name
         {
@@ -100,19 +90,11 @@ namespace ServiceReminder.ViewModels
         public DateTime LastServiceDate
         {
             get { return App.SelectedModel.LastServiceDate; }
-            set { App.SelectedModel.LastServiceDate = value; 
-                ServiceIntervalPickerCellViewModel.CalculateNextServiceDate(SelectedServiceInterval); 
+            set { App.SelectedModel.LastServiceDate = value;
+            ServiceIntervalPickerCellViewModel.CalculateNextServiceDate(); 
                 OnPropertyChanged("NextServiceDate"); OnPropertyChanged(); }
         }
 
-        private string selectedServiceInterval;
-
-        public string SelectedServiceInterval
-        {
-            get { return selectedServiceInterval; }
-            set { selectedServiceInterval = value; OnPropertyChanged("NextServiceDate"); }
-        }
-        
 
         public string NextServiceDate
         {

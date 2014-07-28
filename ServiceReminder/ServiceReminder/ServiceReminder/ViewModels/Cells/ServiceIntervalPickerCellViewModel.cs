@@ -12,7 +12,6 @@ namespace ServiceReminder.ViewModels
         public const string Monthly = "Monthly";
         public const string Quarterly = "Quarterly";
         public const string HalfYearly = "Half Yearly";
-
         private const string Yearly = "Yearly";
 
 
@@ -22,45 +21,65 @@ namespace ServiceReminder.ViewModels
             Items.Add(Monthly);
             Items.Add(Quarterly);
             Items.Add(HalfYearly);
-
             Items.Add(Yearly);
 
             SelectionChangedCommand = new Command((index) =>
             {
                 if (App.SelectedModel == null)
                     return;
-               
+
                 var selectedIndex = Convert.ToInt32(index);
-                var selectedItem = Items[selectedIndex];
-                CalculateNextServiceDate(selectedItem);
+                CalculateNextServiceDate(selectedIndex);
 
-                SelectedItem = selectedItem;
+                // DEMO  USAGE OF MessagingCenter
+                MessagingCenter.Send<ServiceIntervalPickerCellViewModel>(this, "serviceIntervalChanged");
             });
-
-           
-
         }
 
-        public static void CalculateNextServiceDate(string selectedItem)
+        static int? CalculateIndex()
         {
+            if (App.SelectedModel == null)
+                return 0;
+
+            //TODO: THERE'S A BUG - SELECT SERVICE INTERVAL FIRST THEN SELECT LAST SERVICE DATE- FIX LATER
+            var duration = App.SelectedModel.NextServiceDate.Subtract(App.SelectedModel.LastServiceDate);
+
+            //approx calculations (only for demo)
+
+            if (duration.TotalDays <= 31)
+                return 0;
+            else if (duration.TotalDays <= 92)
+                return 1;
+            else if (duration.TotalDays <= 184)
+                return 2;
+            else if (duration.TotalDays <= 366)
+                return 3;
+            return 0;
+        }
+
+        public int? GetSelectedIndex()
+        {
+            // Get SelectedIndex makes sense only for existing items
+            return CalculateIndex();
+        }
+
+        public static void CalculateNextServiceDate(int? selectedIndex = null)
+        {
+            if (!selectedIndex.HasValue)
+                selectedIndex = CalculateIndex();
+
             App.SelectedModel.NextServiceDate = App.SelectedModel.LastServiceDate;
-            if (selectedItem == Monthly)
+           
+            if (selectedIndex == 0)
                 App.SelectedModel.NextServiceDate = App.SelectedModel.NextServiceDate.AddMonths(1);
-            if (selectedItem == Quarterly)
+            if (selectedIndex == 1)
                 App.SelectedModel.NextServiceDate = App.SelectedModel.NextServiceDate.AddMonths(3);
-            if (selectedItem == HalfYearly)
+            if (selectedIndex == 2)
                 App.SelectedModel.NextServiceDate = App.SelectedModel.NextServiceDate.AddMonths(6);
-            if (selectedItem == Yearly)
+            if (selectedIndex == 3)
                 App.SelectedModel.NextServiceDate = App.SelectedModel.NextServiceDate.AddMonths(12);
         }
 
-        private object selectedItem;
-
-        public object SelectedItem
-        {
-            get { return selectedItem; }
-            set { selectedItem = value; OnPropertyChanged(); }
-        }
 
 
         private string pickerText = "Service Interval:";
@@ -79,7 +98,7 @@ namespace ServiceReminder.ViewModels
             set { pickerTitle = value; OnPropertyChanged(); }
         }
 
-        private Command selectionChangedCommand;
+        private static Command selectionChangedCommand;
 
         public Command SelectionChangedCommand
         {
@@ -94,5 +113,7 @@ namespace ServiceReminder.ViewModels
             get { return items; }
             set { items = value; OnPropertyChanged(); }
         }
+
+
     }
 }

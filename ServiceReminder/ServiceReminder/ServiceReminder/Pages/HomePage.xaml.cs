@@ -5,12 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ServiceReminder.Pages
 {
 	public partial class HomePage
 	{
         HomePageViewModel vm;
+        
 		public HomePage ()
 		{
 			InitializeComponent ();
@@ -19,13 +21,18 @@ namespace ServiceReminder.Pages
 
             listView.ItemSelected += listView_ItemSelected;
 
-            ToolbarItems.Add(new Xamarin.Forms.ToolbarItem("Add", null, async () =>
+            
+ 
+		}
+
+        private Action AddToolBar()
+        {
+            return async () =>
             {
                 App.SelectedModel = null;
                 await Navigation.PushAsync(new EditReminderPage());
-            }, 0, 0));
- 
-		}
+            };
+        }
 
         async void listView_ItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
         {
@@ -33,14 +40,22 @@ namespace ServiceReminder.Pages
             await Navigation.PushAsync(new EditReminderPage());
         }
 
+        ToolbarItem toolBarItem;
         protected override void OnAppearing()
         {
             base.OnAppearing();
             vm.PopulateReminderList();
             listView.ItemsSource = vm.ReminderList;
 
+            ToolbarItems.Add(toolBarItem = new ToolbarItem("Add", null, AddToolBar(), 0, 0));
         }
 
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            ToolbarItems.Remove(toolBarItem);
+        }
 
 
 	}
