@@ -143,6 +143,9 @@
     <Content Include="Assets\Tiles\IconicTileSmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Bike.png" />
+    <Content Include="Car.png" />
+    <Content Include="Other.png" />
     <Content Include="README_FIRST.txt" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
@@ -184,6 +187,7 @@
       <Name>SQLite for Windows Phone</Name>
     </SDKReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="..\ServiceReminder\ServiceReminder.projitems" Label="Shared" Condition="Exists('..\ServiceReminder\ServiceReminder.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

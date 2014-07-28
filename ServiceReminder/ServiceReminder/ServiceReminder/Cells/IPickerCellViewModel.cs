@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using Xamarin.Forms;
 
 namespace ServiceReminder.Cells
 {
-    public interface IPickerCellViewModel
+    public interface IPickerCellViewModel : INotifyPropertyChanged
     {
         string PickerText { get; set; }
 
@@ -14,6 +15,8 @@ namespace ServiceReminder.Cells
         Command SelectionChangedCommand { get; set; }
 
         IList<string> Items { get; set; }
+
+        object SelectedItem { get; set; }
     }
 
     //public class PickerCellViewModel : ObservableObject, IPickerCellViewModel

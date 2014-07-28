@@ -17,7 +17,7 @@ namespace ServiceReminder.Models
         public string Name { get; set; }
         public string RegistrationNumber { get; set; }
 
-        public string Photo { get; set; }
+        public string VehicleType { get; set; }
 
         public bool IsReminderEnabled { get; set; }
 

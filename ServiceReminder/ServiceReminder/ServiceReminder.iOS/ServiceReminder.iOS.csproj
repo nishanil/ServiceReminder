@@ -109,6 +109,24 @@
       <HintPath>..\..\packages\Xamarin.Forms.1.0.6186\lib\MonoTouch10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Bike.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Bike%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Car.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Car%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Other.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Other%402x.png" />
+  </ItemGroup>
   <Import Project="..\ServiceReminder\ServiceReminder.projitems" Label="Shared" Condition="Exists('..\ServiceReminder\ServiceReminder.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.1.0.6186\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.1.0.6186\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10\Xamarin.Forms.targets')" />

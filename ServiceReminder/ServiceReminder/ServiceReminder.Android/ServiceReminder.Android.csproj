@@ -82,6 +82,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\AndroidManifest.xml" />
+    <AndroidResource Include="Resources\Drawable\Bike.png" />
+    <AndroidResource Include="Resources\Drawable\Car.png" />
+    <AndroidResource Include="Resources\Drawable\Other.png" />
   </ItemGroup>
   <Import Project="..\ServiceReminder\ServiceReminder.projitems" Label="Shared" Condition="Exists('..\ServiceReminder\ServiceReminder.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

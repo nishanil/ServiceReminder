@@ -10,15 +10,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Cells\DatePickerCellView.xaml.cs">
-      <DependentUpon>DatePickerCellView.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Cells\IPickerCellViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Cells\PickerCellView.xaml.cs">
       <DependentUpon>PickerCellView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Data\ReminderItemDatabase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\SQLite.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ReminderItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ObservableObject.cs" />
@@ -26,24 +23,29 @@
       <DependentUpon>EditReminderPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\HomePage.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\VehicleListPicker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Cells\RemindMeBeforeCellViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Cells\ServiceIntervalPickerCellViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Pages\EditReminderPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Pages\HomePageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Pages\PageViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\EditReminderPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Cells\PickerCellView.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\HomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Cells\DatePickerCellView.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Cells\PickerCellView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>

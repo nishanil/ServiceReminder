@@ -12,9 +12,10 @@ namespace ServiceReminder
 	{
 		public static Page GetMainPage()
 		{
-            return new EditReminderPage();
+            return new NavigationPage(new  HomePage());
 		}
 
         public static ReminderItem SelectedModel { get; set; }
+
 	}
 }

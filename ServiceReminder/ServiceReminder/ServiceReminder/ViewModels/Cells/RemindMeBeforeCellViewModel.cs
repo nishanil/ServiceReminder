@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using Xamarin.Forms;
 
 namespace ServiceReminder.ViewModels
@@ -19,20 +18,33 @@ namespace ServiceReminder.ViewModels
             Items.Add(OneWeekBefore);
             Items.Add(OneMonthBefore);
 
-            SelectionChangedCommand = new Command((index) =>
+            selectionChangedCommand = new Command((index) =>
             {
+                if (App.SelectedModel == null)
+                    return;
                 var selectedIndex = Convert.ToInt32(index);
                 var selectedItem = Items[selectedIndex];
                 if (selectedItem == OneDayBefore)
                     App.SelectedModel.NextReminder = App.SelectedModel.NextServiceDate.AddDays(-1);
-                if(selectedItem == OneWeekBefore)
+                if (selectedItem == OneWeekBefore)
                     App.SelectedModel.NextReminder = App.SelectedModel.NextServiceDate.AddDays(-7);
                 if (selectedItem == OneMonthBefore)
                     App.SelectedModel.NextReminder = App.SelectedModel.NextServiceDate.AddMonths(-1);
 
+                SelectedItem = selectedItem;
             });
         }
-        private string pickerText = "Remind Me Before:";
+
+
+        private object selectedItem;
+
+        public object SelectedItem
+        {
+            get { return selectedItem; }
+            set { selectedItem = value; OnPropertyChanged(); }
+        }
+
+        private string pickerText = "Remind Me Before";
 
         public string PickerText
         {

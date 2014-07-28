@@ -35,7 +35,7 @@ namespace ServiceReminder.Cells
         }
 	}
 
-    public class PickerCell<T> : ViewCell
+    public class PickerCell<T> : ViewCell where T : IPickerCellViewModel
     {
         public static readonly BindableProperty PickerCellViewModelProperty =
                 BindableProperty.Create<PickerCell<T>, T>(p => p.PickerCellViewModel, Activator.CreateInstance<T>());
@@ -46,13 +46,31 @@ namespace ServiceReminder.Cells
             set { SetValue(PickerCellViewModelProperty, value); }
         }
 
+        public static readonly BindableProperty SelectedItemProperty =
+               BindableProperty.Create<PickerCell<T>, string>(p => p.SelectedItem, string.Empty);
+
+        public string SelectedItem
+        {
+            get { return (string)GetValue(SelectedItemProperty); }
+            set { SetValue(SelectedItemProperty, value); }
+        }
+
         public PickerCell()
         {
             var vw = new PickerCellView();
             vw.BindingContext = PickerCellViewModel;
+
+            PickerCellViewModel.PropertyChanged += PickerCellViewModel_PropertyChanged;
+
             vw.PopulatePicker();
             View = vw;
             
+        }
+
+        void PickerCellViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "SelectedItem")
+                SelectedItem = (sender as IPickerCellViewModel).SelectedItem.ToString();
         }
 
 
