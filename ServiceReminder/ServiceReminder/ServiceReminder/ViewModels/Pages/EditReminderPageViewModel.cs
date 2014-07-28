@@ -56,6 +56,9 @@ namespace ServiceReminder.ViewModels
             if (App.SelectedModel != null && !string.IsNullOrEmpty(App.SelectedModel.Name) && !string.IsNullOrEmpty(App.SelectedModel.RegistrationNumber))
             {
                 new ReminderItemDatabase().SaveItem(App.SelectedModel);
+                var remiderService = DependencyService.Get<IReminderService>();
+                if(remiderService!=null)
+                remiderService.Remind(DateTime.Now.AddSeconds(25), "Vehicle Service Alert", App.SelectedModel.Name + " is due for service on: " + App.SelectedModel.NextServiceDate.ToShortDateString());
             }
             else
                 return false;
@@ -119,7 +122,7 @@ namespace ServiceReminder.ViewModels
             get { return App.SelectedModel.IsReminderEnabled; }
             set { App.SelectedModel.IsReminderEnabled = value; OnPropertyChanged(); }
         }
-        
+
 
         private string vehiclePhoto;        
 

@@ -35,7 +35,30 @@ namespace ServiceReminder.iOS
 
             window.MakeKeyAndVisible();
 
+            if (options != null)
+            {
+                // check for a local notification
+                if (options.ContainsKey(UIApplication.LaunchOptionsLocalNotificationKey))
+                {
+                    var localNotification = options[UIApplication.LaunchOptionsLocalNotificationKey] as UILocalNotification;
+                    if (localNotification != null)
+                    {
+                        new UIAlertView(localNotification.AlertAction, localNotification.AlertBody, null, "OK", null).Show();
+                        // reset our badge
+                        UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
+                    }
+                }
+            }
             return true;
+        }
+
+        public override void ReceivedLocalNotification(UIApplication application, UILocalNotification notification)
+        {
+            // show an alert
+            new UIAlertView(notification.AlertAction, notification.AlertBody, null, "OK", null).Show();
+
+            // reset our badge
+            UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
         }
     }
 }
