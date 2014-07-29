@@ -21,11 +21,9 @@ namespace ServiceReminder.Pages
 
             listView.ItemSelected += listView_ItemSelected;
 
-            
- 
 		}
 
-        private Action AddToolBar()
+        private Action Save()
         {
             return async () =>
             {
@@ -47,7 +45,7 @@ namespace ServiceReminder.Pages
             vm.PopulateReminderList();
             listView.ItemsSource = vm.ReminderList;
 
-            ToolbarItems.Add(toolBarItem = new ToolbarItem("Add", null, AddToolBar(), 0, 0));
+            ToolbarItems.Add(toolBarItem = new ToolbarItem("Add", null, Save(), 0, 0));
         }
 
         protected override void OnDisappearing()

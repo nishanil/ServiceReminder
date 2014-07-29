@@ -23,12 +23,12 @@ namespace ServiceReminder.Pages
 
             this.BindingContext = vm;
 
-            SetBinding(Page.TitleProperty, new Binding(EditReminderPageViewModel.TitlePropertyName));
-            SetBinding(Page.IconProperty, new Binding(EditReminderPageViewModel.IconPropertyName));
+            //SetBinding(Page.TitleProperty, new Binding(EditReminderPageViewModel.TitlePropertyName));
+           // SetBinding(Page.IconProperty, new Binding(EditReminderPageViewModel.IconPropertyName));
 
 		}
 
-        private Action AddToolBar()
+        private Action Save()
         {
             return async () => {
                 var result = await vm.Save();
@@ -44,7 +44,7 @@ namespace ServiceReminder.Pages
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            ToolbarItems.Add(toolbarItem = new ToolbarItem("Save", null, AddToolBar(), 0, 0));
+            ToolbarItems.Add(toolbarItem = new ToolbarItem("Save", null, Save(), 0, 0));
 
             vm.OnAppearing();
         }

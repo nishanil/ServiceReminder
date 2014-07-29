@@ -5,7 +5,7 @@
                        xmlns:cells="clr-namespace:ServiceReminder.Cells;assembly=ServiceReminder"
                        xmlns:sys="clr-namespace:System;assembly=mscorlib"
                        xmlns:vm="clr-namespace:ServiceReminder.ViewModels;assembly=ServiceReminder"
-                      
+                       
                        >
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
