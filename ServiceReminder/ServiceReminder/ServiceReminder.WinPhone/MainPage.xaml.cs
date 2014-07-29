@@ -22,5 +22,18 @@ namespace ServiceReminder.WinPhone
             Forms.Init();
             Content = ServiceReminder.App.GetMainPage().ConvertPageToUIElement(this);
         }
+
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            string param1Value = "";
+            string param2Value = "";
+
+            NavigationContext.QueryString.TryGetValue("param1", out param1Value);
+            NavigationContext.QueryString.TryGetValue("param2", out param2Value);
+            if (!string.IsNullOrEmpty(param1Value))
+                MessageBox.Show(param1Value, param2Value, MessageBoxButton.OK);
+        }
     }
 }

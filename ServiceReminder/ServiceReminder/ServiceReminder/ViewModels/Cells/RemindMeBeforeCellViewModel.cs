@@ -41,9 +41,9 @@ namespace ServiceReminder.ViewModels
                 var date = App.SelectedModel.NextReminder.Subtract(App.SelectedModel.NextServiceDate);
                 if (date.TotalDays == -1)
                     return  0;
-                else if (date.TotalDays == -7)
+                 if (date.TotalDays == -7)
                     return  1;
-                else if (date.TotalDays == -31)
+                 if (date.TotalDays == -31)
                     return  3;
             }
             return 0;

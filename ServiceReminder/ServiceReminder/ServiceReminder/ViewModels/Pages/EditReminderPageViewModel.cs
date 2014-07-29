@@ -35,6 +35,7 @@ namespace ServiceReminder.ViewModels
                 this.Title = "Edit Service Reminder";
             }
 
+            // DEMO usage of Custom Page instead of Picker
             ChooseVehichleTypeCommand = new Command(async () => {
 
                 vehicleListPicker = new VehicleListPicker();
@@ -49,8 +50,6 @@ namespace ServiceReminder.ViewModels
             });
         }
 
-        public Command SaveCommand { get; set; }
-
         async public Task<bool> Save()
         {
             if (App.SelectedModel != null && !string.IsNullOrEmpty(App.SelectedModel.Name) && !string.IsNullOrEmpty(App.SelectedModel.RegistrationNumber))
@@ -64,7 +63,6 @@ namespace ServiceReminder.ViewModels
                 return false;
 
             return true;
-        
         }
 
         public void OnAppearing()
