@@ -23,8 +23,8 @@ namespace ServiceReminder.Pages
 
             this.BindingContext = vm;
 
-            //SetBinding(Page.TitleProperty, new Binding(EditReminderPageViewModel.TitlePropertyName));
-           // SetBinding(Page.IconProperty, new Binding(EditReminderPageViewModel.IconPropertyName));
+            SetBinding(Page.TitleProperty, new Binding(EditReminderPageViewModel.TitlePropertyName));
+            SetBinding(Page.IconProperty, new Binding(EditReminderPageViewModel.IconPropertyName));
 
 		}
 
