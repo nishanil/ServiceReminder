@@ -70,6 +70,9 @@ namespace ServiceReminder.ViewModels
         {
             if (vehicleListPicker != null)
                 VehicleType = vehicleListPicker.SelectedVehicle;
+            // if nothing was selected default to car
+            if (string.IsNullOrEmpty(VehicleType))
+                VehicleType = "Car";
         }
 
         public string Name

@@ -11,7 +11,7 @@ using Xamarin.Forms.Platform.Android;
 
 namespace ServiceReminder.Droid
 {
-    [Activity(Label = "ServiceReminder", MainLauncher = true)]
+    [Activity(Label = "ServiceReminder", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation))]
     public class MainActivity : AndroidActivity
     {
         protected override void OnCreate(Bundle bundle)

@@ -20,8 +20,6 @@
             </OnPlatform.WinPhone>
         </OnPlatform>
     </ContentPage.Padding>
-
-    <ContentPage.Content>
         <StackLayout>
         <TableView>
             <TableView.Root>
@@ -48,7 +46,7 @@
 
             </TableView.Root>
         </TableView>
-            <!--<Button Command="{Binding SaveCommand}" Text="Save"></Button>-->
+
     </StackLayout>
-    </ContentPage.Content>
+
 </ContentPage>
